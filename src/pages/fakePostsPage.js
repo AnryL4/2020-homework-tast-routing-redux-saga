@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { showAlert, createPost, requestPosts } from '../store/actions';
+import {
+	showAlert,
+	createPost,
+	requestPosts,
+	hideAlert,
+} from '../store/actions';
 import Alert from '../component/Alert';
 import { Posts } from '../component/Posts';
 import { Loader } from '../component/Loader';
@@ -11,6 +16,13 @@ export const FakePostsPage = () => {
 		return state.app;
 	});
 	const [title, setTitle] = useState('');
+
+	useEffect(() => {
+		const timerHideAlert = setTimeout(() => {
+			dispatch(hideAlert('alert'));
+		}, 3000);
+		return () => clearTimeout(timerHideAlert);
+	}, [alert]);
 
 	const submitHandler = (event) => {
 		event.preventDefault();

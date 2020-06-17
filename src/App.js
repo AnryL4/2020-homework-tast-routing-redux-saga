@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	BrowserRouter as Router,
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { routes } from './routes';
 import './css/App.css';
-import { sagaChangePrivate, showAlert } from './store/actions';
+import { sagaChangePrivate, showAlert, hideAlert } from './store/actions';
 import { Navigation } from './component/Navigation';
 import AlertLogin from './component/AlertLogin';
 
@@ -18,6 +18,13 @@ const App = () => {
 	const { isPrivate, alertLogin } = useSelector((state) => {
 		return state.app;
 	});
+
+	useEffect(() => {
+		const timerHideAlert = setTimeout(() => {
+			dispatch(hideAlert('alertLogin'));
+		}, 3000);
+		return () => clearTimeout(timerHideAlert);
+	  }, [alertLogin]);
 
 	const [input, changeInput] = useState({
 		login: '',

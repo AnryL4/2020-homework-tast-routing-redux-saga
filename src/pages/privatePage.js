@@ -10,7 +10,18 @@ export const PrivatePage = () => {
 		<p>Содержимое доступно только авторизированным пользователям</p>
 	);
 
-	const inLogin = <p>Секрет...</p>;
+	const inLogin = (
+		<div className='alert alert-success' role='alert'>
+			<h4 className='alert-heading'>Секретная информация!</h4>
+			<hr />
+			<p className='alertP'>
+				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
+				nesciunt, voluptate ratione facere quia quis.
+			</p>
+			<hr />
+			<p className='mb-0 alertP'>Lorem ipsum dolor sit.</p>
+		</div>
+	);
 
 	return (
 		<div className='panel'>

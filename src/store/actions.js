@@ -48,9 +48,9 @@ export function showAlert(text, alertType) {
 			payload: text,
 			alertType,
 		});
-		let timerHideAlert = setTimeout(() => {
-			dispatch(hideAlert(alertType));
-		}, 2000);
+		// let timerHideAlert = setTimeout(() => {
+		// 	dispatch(hideAlert(alertType));
+		// }, 2000);
 	};
 }
 
