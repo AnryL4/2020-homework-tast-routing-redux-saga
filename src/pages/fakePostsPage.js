@@ -15,7 +15,9 @@ export const FakePostsPage = () => {
 	const submitHandler = (event) => {
 		event.preventDefault();
 		if (!title.trim()) {
-			dispatch(showAlert('Запрещено создавать посты без заголовка'));
+			dispatch(
+				showAlert('Запрещено создавать посты без заголовка', 'alert')
+			);
 			return;
 		}
 		const newPost = {

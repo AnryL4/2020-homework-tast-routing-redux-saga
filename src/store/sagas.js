@@ -1,6 +1,11 @@
-import { takeEvery, put, call, select, delay } from 'redux-saga/effects';
-import { REQUEST_POSTS, CREATE_POST, FETCH_POSTS } from './types';
-import { showLoader, hideLoader, showAlert } from './actions';
+import { takeEvery, put, call, select, delay, take } from 'redux-saga/effects';
+import {
+	REQUEST_POSTS,
+	CREATE_POST,
+	FETCH_POSTS,
+	SAGA_CHANGE_PRIVATE,
+} from './types';
+import { showLoader, hideLoader, showAlert, changePrivate } from './actions';
 
 export function* sagaWatcherRequestPosts() {
 	yield takeEvery(REQUEST_POSTS, sagaWorker);
@@ -10,15 +15,15 @@ export function* sagaWatcherCreatePosts() {
 	yield takeEvery(CREATE_POST, watchFirstThreeTodosCreation);
 }
 
-// export function* sagaWatcherLoginFlow() {
-// 	while(true) {
-// 		yield take(LOGIN)
-// 		yield put(showAlert('Авторизация'));
+export function* sagaWatcherLoginFlow() {
+	while (true) {
+		yield take(SAGA_CHANGE_PRIVATE);
+		yield put(changePrivate());
 
-// 		yield take(LOGIN)
-// 		yield put(showAlert('Выход из аккаунта'));
-// 	}
-// }
+		yield take(SAGA_CHANGE_PRIVATE);
+		yield put(changePrivate());
+	}
+}
 
 function* watchFirstThreeTodosCreation() {
 	const Posts = yield select((state) => state.posts.posts);

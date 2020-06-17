@@ -7,11 +7,18 @@ import {
 	REQUEST_POSTS,
 	CHANGE_PRIVATE,
 	DELETE_POST,
+	SAGA_CHANGE_PRIVATE,
 } from './types';
 
 export function changePrivate() {
 	return {
 		type: CHANGE_PRIVATE,
+	};
+}
+
+export function sagaChangePrivate() {
+	return {
+		type: SAGA_CHANGE_PRIVATE,
 	};
 }
 
@@ -34,21 +41,23 @@ export function hideLoader() {
 	};
 }
 
-export function showAlert(text) {
+export function showAlert(text, alertType) {
 	return (dispatch) => {
 		dispatch({
 			type: SHOW_ALERT,
 			payload: text,
+			alertType,
 		});
-		setTimeout(() => {
-			dispatch(hideAlert());
-		}, 3000);
+		let timerHideAlert = setTimeout(() => {
+			dispatch(hideAlert(alertType));
+		}, 2000);
 	};
 }
 
-export function hideAlert() {
+export function hideAlert(alertType) {
 	return {
 		type: HIDE_ALERT,
+		alertType,
 	};
 }
 

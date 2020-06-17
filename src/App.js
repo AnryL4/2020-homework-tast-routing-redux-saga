@@ -8,14 +8,15 @@ import {
 } from 'react-router-dom';
 import { routes } from './routes';
 import './css/App.css';
-import { changePrivate } from './store/actions';
+import { sagaChangePrivate, showAlert } from './store/actions';
 import { Navigation } from './component/Navigation';
+import AlertLogin from './component/AlertLogin';
 
 const App = () => {
 	const dispatch = useDispatch();
 
-	const isPrivate = useSelector((state) => {
-		return state.app.isPrivate;
+	const { isPrivate, alertLogin } = useSelector((state) => {
+		return state.app;
 	});
 
 	const [input, changeInput] = useState({
@@ -38,12 +39,18 @@ const App = () => {
 		event.preventDefault();
 		if (isPrivate) {
 			console.log('Выход из системы');
-			dispatch(changePrivate());
+			dispatch(sagaChangePrivate());
 			localStorage.removeItem('rememberMe');
 			return;
 		}
 		if (input.login !== 'admin' || input.password !== 'pass') {
 			console.log('Отказано в авторизации, неверные данные');
+			dispatch(
+				showAlert(
+					'Отказано в авторизации, неверные данные',
+					'alertLogin'
+				)
+			);
 			changeInput((state) => ({
 				...state,
 				login: '',
@@ -56,7 +63,7 @@ const App = () => {
 		} else {
 			localStorage.removeItem('rememberMe');
 		}
-		dispatch(changePrivate());
+		dispatch(sagaChangePrivate());
 		console.log('Авторизация');
 		changeInput((state) => ({
 			...state,
@@ -97,7 +104,11 @@ const App = () => {
 					Запомнить меня?
 				</label>
 			</div>
-			<button type='submit' className='btn btn-dark'>
+			<button
+				type='submit'
+				className='btn btn-dark'
+				style={{ marginBottom: '10px' }}
+			>
 				Войти
 			</button>
 		</>
@@ -128,6 +139,7 @@ const App = () => {
 						onSubmit={submitHandler}
 					>
 						{!isPrivate ? inLoginForm : outLoginForm}
+						{alertLogin && <AlertLogin text={alertLogin} />}
 					</form>
 				</div>
 				<Switch>

@@ -17,7 +17,7 @@ const Alert = ({ text }) => {
 				data-dismiss='alert'
 				aria-label='Close'
 				onClick={() => {
-					dispatch(hideAlert());
+					dispatch(hideAlert('alert'));
 				}}
 			>
 				<span aria-hidden='true'>&times;</span>
@@ -26,4 +26,4 @@ const Alert = ({ text }) => {
 	);
 };
 
-export default React.memo(Alert)
+export default React.memo(Alert);

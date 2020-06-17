@@ -9,6 +9,7 @@ import {
 const initialState = {
 	loading: false,
 	alert: null,
+	alertLogin: null,
 	isPrivate: localStorage.getItem('rememberMe'),
 };
 
@@ -19,9 +20,9 @@ export const appReducer = (state = initialState, action) => {
 		case HIDE_LOADER:
 			return { ...state, loading: false };
 		case SHOW_ALERT:
-			return { ...state, alert: action.payload };
+			return { ...state, [action.alertType]: action.payload };
 		case HIDE_ALERT:
-			return { ...state, alert: null };
+			return { ...state, [action.alertType]: null };
 		case CHANGE_PRIVATE:
 			return { ...state, isPrivate: !state.isPrivate };
 		default:
