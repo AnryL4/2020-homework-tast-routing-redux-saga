@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	BrowserRouter as Router,
@@ -24,6 +24,7 @@ const App = () => {
 			dispatch(hideAlert('alertLogin'));
 		}, 3000);
 		return () => clearTimeout(timerHideAlert);
+		// eslint-disable-next-line
 	  }, [alertLogin]);
 
 	const [input, changeInput] = useState({
@@ -32,7 +33,7 @@ const App = () => {
 		rememberMe: false,
 	});
 
-	const changeInputHandler = (event) => {
+	const changeInputHandler = useCallback((event) => {
 		event.persist();
 		const input = event.target;
 		const value = input.type === 'checkbox' ? input.checked : input.value;
@@ -40,7 +41,7 @@ const App = () => {
 			...state,
 			[input.name]: value,
 		}));
-	};
+	}, []);
 
 	const submitHandler = (event) => {
 		event.preventDefault();

@@ -7,7 +7,7 @@ const AlertLogin = ({ text }) => {
 
 	return (
 		<div
-			className='alert alert-danger fade show'
+			className='alert alert-danger animate__animated animate__fadeIn animate__faster'
 			role='alert'
 			onClick={() => {
 				dispatch(hideAlert('alertLogin'));

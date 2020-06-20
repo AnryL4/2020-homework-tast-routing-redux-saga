@@ -27,8 +27,11 @@ export function* sagaWatcherLoginFlow() {
 
 function* watchFirstThreeTodosCreation() {
 	const Posts = yield select((state) => state.posts.posts);
+	console.log(Posts);
 	if (!(Posts.length % 3)) {
-		yield put(showAlert('Вы сами создали 3 поста! Создайте ещё 3 поста!'));
+		yield put(
+			showAlert('Вы сами создали 3 поста! Создайте ещё 3 поста!', 'alert')
+		);
 	}
 }
 

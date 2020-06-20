@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	showAlert,
@@ -22,6 +22,7 @@ export const FakePostsPage = () => {
 			dispatch(hideAlert('alert'));
 		}, 3000);
 		return () => clearTimeout(timerHideAlert);
+		// eslint-disable-next-line
 	}, [alert]);
 
 	const submitHandler = (event) => {
@@ -40,10 +41,10 @@ export const FakePostsPage = () => {
 		setTitle('');
 	};
 
-	const changeInputHandler = (event) => {
+	const changeInputHandler = useCallback((event) => {
 		event.persist();
 		setTitle(event.target.value);
-	};
+	}, []);
 
 	return (
 		<div className='panel'>

@@ -7,7 +7,7 @@ const Alert = ({ text }) => {
 
 	return (
 		<div
-			className='alert alert-warning alert-dismissible fade show'
+			className='alert alert-warning animate__animated animate__fadeIn animate__faster'
 			role='alert'
 		>
 			{text}

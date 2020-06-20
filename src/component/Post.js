@@ -10,7 +10,7 @@ export const Post = React.memo(({ post }) => {
 	};
 
 	return (
-		<div className='card' onClick={removePost}>
+		<div className='card animate__animated animate__bounceInRight animate__faster' onClick={removePost}>
 			<div className='card-body'>
 				<h5 className='card-title'>{post.title}</h5>
 			</div>
