@@ -12,9 +12,7 @@ import { Loader } from '../component/Loader';
 
 export const FakePostsPage = () => {
 	const dispatch = useDispatch();
-	const { alert, loading } = useSelector((state) => {
-		return state.app;
-	});
+	const { alert, loading } = useSelector((state) => state.app);
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
@@ -22,8 +20,7 @@ export const FakePostsPage = () => {
 			dispatch(hideAlert('alert'));
 		}, 3000);
 		return () => clearTimeout(timerHideAlert);
-		// eslint-disable-next-line
-	}, [alert]);
+	}, [alert, dispatch]);
 
 	const submitHandler = (event) => {
 		event.preventDefault();
@@ -46,45 +43,44 @@ export const FakePostsPage = () => {
 		setTitle(event.target.value);
 	}, []);
 
+	const dispatchRequestPosts = () => {
+		dispatch(requestPosts());
+	};
+
 	return (
-		<div className='panel'>
-			<div className='content'>
-				<h2>Посты</h2>
-				<form onSubmit={submitHandler}>
-					<div className='form-group'>
-						<label htmlFor='title'>Заголовок поста</label>
-						<input
-							type='text'
-							className='form-control'
-							id='title'
-							value={title}
-							name='title'
-							onChange={changeInputHandler}
-						/>
-					</div>
-					{alert && <Alert text={alert} />}
-				</form>
-				<div style={{ marginBottom: '5px' }}>
-					<button
-						className='btn btn-success'
-						type='submit'
-						style={{ marginRight: '10px' }}
-						onClick={submitHandler}
-					>
-						Создать
-					</button>
-					<button
-						className='btn btn-success'
-						type='button'
-						onClick={() => {
-							dispatch(requestPosts());
-						}}
-					>
-						Загрузить с сервера
-					</button>
+		<div className='content'>
+			<h1>Посты</h1>
+			<form onSubmit={submitHandler}>
+				<div className='form-group'>
+					<label htmlFor='title'>Заголовок поста</label>
+					<input
+						type='text'
+						className='form-control'
+						id='title'
+						value={title}
+						name='title'
+						onChange={changeInputHandler}
+					/>
 				</div>
-				{loading ? <Loader /> : <Posts />}
+				{alert && <Alert text={alert} />}
+			</form>
+			<div className='buttons'>
+				<button
+					className='btn btn-success'
+					type='submit'
+					onClick={submitHandler}
+				>
+					Создать
+				</button>
+				<button
+					className='btn btn-success'
+					type='button'
+					onClick={dispatchRequestPosts}
+				>
+					Загрузить с сервера
+				</button>
 			</div>
+			{loading ? <Loader /> : <Posts />}
 		</div>
 	);
 };

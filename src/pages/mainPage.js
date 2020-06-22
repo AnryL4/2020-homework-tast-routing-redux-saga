@@ -2,11 +2,9 @@ import React from 'react';
 
 export const MainPage = () => {
 	return (
-		<div className='panel'>
-			<div className='content'>
-				<h2>Главная</h2>
-				<p>SPA react. Чтобы залогится используйте admin/pass.</p>
-			</div>
+		<div className='content'>
+			<h1>Главная</h1>
+			<p>SPA react. Чтобы залогится используйте admin/pass.</p>
 		</div>
 	);
 };

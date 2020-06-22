@@ -10,7 +10,7 @@ const initialState = {
 	loading: false,
 	alert: null,
 	alertLogin: null,
-	isPrivate: localStorage.getItem('rememberMe'),
+	isAuth: JSON.parse(localStorage.getItem('rememberMe')),
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -24,7 +24,7 @@ export const appReducer = (state = initialState, action) => {
 		case HIDE_ALERT:
 			return { ...state, [action.alertType]: null };
 		case CHANGE_PRIVATE:
-			return { ...state, isPrivate: !state.isPrivate };
+			return { ...state, isAuth: !state.isAuth };
 		default:
 			return state;
 	}

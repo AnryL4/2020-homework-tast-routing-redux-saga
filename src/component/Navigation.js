@@ -3,33 +3,33 @@ import { NavLink } from 'react-router-dom';
 
 export const Navigation = () => (
 	<nav>
-		<ul className='navigation'>
-			<li>
+		<ul className='nav flex-column nav-pills nav-fill navigation'>
+			<li className='nav-item'>
 				<NavLink
-					className='link-home'
+					className='nav-link'
 					to='/'
 					exact
 					activeClassName='active'
 				>
-					Main
+					Главная
 				</NavLink>
 			</li>
-			<li>
+			<li className='nav-item'>
 				<NavLink
-					className='link-home'
+					className='nav-link'
 					to='/posts'
 					activeClassName='active'
 				>
-					Posts
+					Посты
 				</NavLink>
 			</li>
-			<li>
+			<li className='nav-item'>
 				<NavLink
-					className='link-home'
+					className='nav-link'
 					to='/private'
 					activeClassName='active'
 				>
-					Private
+					Приват
 				</NavLink>
 			</li>
 		</ul>

@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux';
 import { Post } from './Post';
 
 export const Posts = () => {
-	const { posts, fetchedPosts } = useSelector((state) => {
-		return state.posts;
-	});
+	const { posts, fetchedPosts } = useSelector(state => state.posts);
 
 	const generalPosts = [...posts, ...fetchedPosts];
 	if (!generalPosts.length) {
